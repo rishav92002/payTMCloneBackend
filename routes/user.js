@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {handleUserSignUp} = require("../controllers/userControllers");
+const {handleUserSignUp,handleUserLogIn} = require("../controllers/userControllers");
 
 
 
@@ -10,7 +10,6 @@ router.get("/",(req,res)=>{
 
 
 router.post("/signup",handleUserSignUp);
-
-
+router.post("/login",handleUserLogIn);
 
 module.exports = router;
