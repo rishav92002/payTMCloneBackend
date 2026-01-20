@@ -16,6 +16,7 @@ const authenticateUser = async (req,res,next)=>{
         if(!decoded.id){
             return res.status(401).json({message:"Unauthorized: Invalid token"});
         }
+        console.log('Authenticated user ID:', decoded.id);
         req.user = decoded;
         next();
 

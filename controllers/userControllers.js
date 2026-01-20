@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const zod = require("zod");
 const {authenticateUser} = require("../middlewares/userMiddleWare");
 const User = require("../models/userModel");
+const Account = require("../models/accountModel");
 const app_config = require("../configs/config");
 
 
@@ -45,6 +46,12 @@ const handleUserSignUp = async (req,res)=>{
             password:hashedPassword
         });
         await newUser.save();
+        //create account for user
+        const newAccount = new Account({
+            userId: newUser._id,
+            balance:  Math.random()*1000
+        })
+        await newAccount.save();
         res.status(201).json({message:"User registered successfully"});
 
     }catch(err){
