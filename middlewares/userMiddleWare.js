@@ -12,7 +12,8 @@ const authenticateUser = async (req,res,next)=>{
             return  res.status(401).json({message:"Unauthorized: No token provided"});
         }
         const decoded = await jwt.verify(token,app_config.jwt_secret);
-        if(!decoded){
+        
+        if(!decoded.id){
             return res.status(401).json({message:"Unauthorized: Invalid token"});
         }
         req.user = decoded;

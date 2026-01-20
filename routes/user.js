@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {handleUserSignUp,handleUserLogIn} = require("../controllers/userControllers");
+const {handleUserSignUp,handleUserLogIn,handleUserProfileEdit,handleFindUserBytext} = require("../controllers/userControllers");
+const {authenticateUser} = require("../middlewares/userMiddleWare");
 
 
 
@@ -11,5 +12,7 @@ router.get("/",(req,res)=>{
 
 router.post("/signup",handleUserSignUp);
 router.post("/login",handleUserLogIn);
+router.put("/edit-profile",authenticateUser,handleUserProfileEdit);
+router.get("/bulkSearch",authenticateUser,handleFindUserBytext);
 
 module.exports = router;
